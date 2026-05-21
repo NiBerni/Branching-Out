@@ -26,6 +26,8 @@ def filter_users_by_age(age: int) -> None:
 		users = json.load(file)
 	filtered_users = [user for user in users if user["age"] == age]
 
+	if not filtered_users:
+		print("No users found with that age.")
 	for user in filtered_users:
 		print(user)
 
@@ -48,7 +50,8 @@ def filter_users_by_email(email: str) -> None:
 	filtered_users = [
 		user for user in users if user["email"].lower().strip() == email.lower().strip()
 	]
-
+	if not filtered_users:
+		print("No users found with that email.")
 	for user in filtered_users:
 		print(user)
 
@@ -58,8 +61,8 @@ if __name__ == "__main__":
 	It prompts the user to choose a filter option (name, email, or age) 
 	and then calls the corresponding filtering function based on the user's choice.	
 	"""
-	print("   -----   Welcome to the User Filtering App!   -----   ")
-	filter_option = input("   What would you like to filter by? "
+	print("   -----   Welcome to the User Filtering App!   ----- \n")
+	filter_option = input("What would you like to filter by? "
 	                      "('name', 'email' or 'age'): ").strip().lower()
 
 	if filter_option == "name":
@@ -69,7 +72,7 @@ if __name__ == "__main__":
 		while True:
 			try:
 				age_to_search = int(input("   Enter an age to filter users: "))
-				if age_to_search < 0 or age_to_search > 151:
+				if age_to_search < 0 or age_to_search > 150:
 					raise ValueError
 				filter_users_by_age(age_to_search)
 				break
