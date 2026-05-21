@@ -1,7 +1,7 @@
 import json
 
 
-def filter_users_by_name(name):
+def filter_users_by_name(name):  # code provided by codio therefore left untouched
 	with open("users.json", "r") as file:
 		users = json.load(file)
 
@@ -45,30 +45,39 @@ def filter_users_by_email(email: str) -> None:
 	with open("users.json", "r") as file:
 		users = json.load(file)
 
-	filtered_users = [user for user in users if user["email"].lower().strip() == email.lower().strip()]
+	filtered_users = [
+		user for user in users if user["email"].lower().strip() == email.lower().strip()
+	]
 
 	for user in filtered_users:
 		print(user)
 
 if __name__ == "__main__":
-	filter_option = input("What would you like to filter by? ('name', 'email' or 'age'): ").strip().lower()
+	"""
+	Main function to execute the user filtering based on user input. 
+	It prompts the user to choose a filter option (name, email, or age) 
+	and then calls the corresponding filtering function based on the user's choice.	
+	"""
+	print("   -----   Welcome to the User Filtering App!   -----   ")
+	filter_option = input("   What would you like to filter by? "
+	                      "('name', 'email' or 'age'): ").strip().lower()
 
 	if filter_option == "name":
-		name_to_search = input("Enter a name to filter users: ").strip()
+		name_to_search = input("   Enter a name to filter users: ").strip()
 		filter_users_by_name(name_to_search)
 	elif filter_option == "age":
 		while True:
 			try:
-				age_to_search = int(input("Enter an age to filter users: "))
+				age_to_search = int(input("   Enter an age to filter users: "))
 				if age_to_search < 0 or age_to_search > 151:
 					raise ValueError
 				filter_users_by_age(age_to_search)
 				break
 			except ValueError:
-				print("Invalid input. \n"
-				      "Please enter a valid age between 0 and 150.")
+				print("[!]Invalid input. \n"
+				      "[!]Please enter a valid age between 0 and 150.")
 	elif filter_option == "email":
-		email_to_search = input("Enter an email to filter users: ").strip()
+		email_to_search = input("   Enter an email to filter users: ").strip()
 		filter_users_by_email(email_to_search)
 	else:
-		print("Filtering by that option is not yet supported.")
+		print("[!]Filtering by that option is not yet supported.")
